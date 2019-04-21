@@ -26,6 +26,7 @@ public class CoffeeOrderService {
         CoffeeOrder order = CoffeeOrder.builder()
                 .customer(customer)
                 .items(new ArrayList<>(Arrays.asList(coffees)))
+                .state(OrderState.INIT)
                 .build();
         CoffeeOrder saved = coffeeOrderRepository.save(order);
         log.info("New Order: {}", saved);
