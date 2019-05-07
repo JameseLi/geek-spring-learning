@@ -26,15 +26,15 @@ public class SimpleReactorDemoApplication implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         Flux.range(1, 6)
                 .doOnRequest(n -> log.info("Request Number: {}", n))
-                .publishOn(Schedulers.elastic())
+//                .publishOn(Schedulers.elastic())
                 .doOnComplete(() -> log.info("Publisher Complete 1"))
                 .map(i -> {
                     log.info("Publisher {}, {}", Thread.currentThread(), i);
-                    return 10 / i - 3;
-//                    return i;
+//                    return 10 / (i - 3);
+                    return i;
                 })
                 .doOnComplete(() -> log.info("Publisher Complete 2"))
-                .subscribeOn(Schedulers.single())
+//                .subscribeOn(Schedulers.single())
 // 				.onErrorResume(e -> {
 //					log.error("Exception {}", e.toString());
 //					return Mono.just(-1);
